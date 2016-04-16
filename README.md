@@ -1,12 +1,7 @@
-# angular
+# JobbStat
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
+En webbapp som käkar upp SCB:s jobbstatistik och spottar ut lite vettig information som faktiskt går att överblicka!
 
-## Build & development
+## Visualisera SCBs jobbstatistik
 
-Run `grunt` for building and `grunt serve` for preview.
-
-## Testing
-
-Running `grunt test` will run the unit tests with karma.
+Appen är till för den som är intresserad av den för vilket syfte som helst.
