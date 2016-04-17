@@ -42,10 +42,11 @@
     </div>
     <div class="panel panel-primary">
       <div class="panel-heading"><i class="fa fa-info-circle" aria-hidden="true"></i>
-  Ytterligare information</div>
+  Ytterligare information
+
+  </div>
       <div class="panel-body">
       <ul class="list-unstyled">
-        <button ng-click="createDataset()">Create dataset</button>
         <li><strong>Antal arbetare: </strong>{{currentObject.total}}</li>
         <li><strong>Antal män: </strong>{{currentObject.totalMan}}</li>
         <li><strong>Antal kvinnor: </strong>{{currentObject.totalKvinnor}}</li>
@@ -61,14 +62,17 @@
   <div class="col-lg-3">
     <div class="panel panel-default search-panel">
       <div class="panel-heading"><i class="fa fa-list" aria-hidden="true"></i>
-    {{wew}}</div>
+    {{wew}}
+        <input placeholder="Sök yrke" ng-model="query" type="text"/>
+    </div>
       <div class="panel-body search-table pre-scrollable">
-        <table class="table table-condensed">
-          <tr ng-repeat="jobb in totaldata">
-            <td><a href="" ng-click="select(jobb.id)">{{jobb.label}}</a></td>
+      <table class="table table-condensed">
+          <tr ng-repeat="jobb in searchObject | filter: query">
+            <td><a href="" ng-click="select(jobb.key)">{{jobb.label}}</a></td>
 
           </tr>
         </table>
+
       </div>
     </div>
   </div>

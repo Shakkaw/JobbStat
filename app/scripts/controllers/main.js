@@ -19,7 +19,15 @@ angular.module('angularApp')
 
     $http.get('./data/jobbstat_man.json').success(function(data) {
           $scope.dataset = data;
+          $http.get('./data/jobbstat_kvinna.json').success(function(data) {
+            $scope.dataset2 = data;
+            $http.get('./data/jobbstat_region.json').success(function(data) {
+              $scope.regiondata = data;
+              $scope.createDataset();
+            });
+          });
         });
+    /*
     $http.get('./data/jobbstat_kvinna.json').success(function(data) {
           $scope.dataset2 = data;
         });
@@ -27,6 +35,7 @@ angular.module('angularApp')
     $http.get('./data/jobbstat_region.json').success(function(data) {
           $scope.regiondata = data;
         });
+        */
 
     $scope.selectedID = '0000';
 
@@ -46,6 +55,16 @@ angular.module('angularApp')
 
     $scope.wewlad = function(){
       return 'aaa';
+    };
+
+    $scope.generateSearch = function(){
+      $scope.searchObject = [];
+      var index = 0;
+      for (var key in $scope.totaldata) {
+        $scope.searchObject[index] = {key:key, label: $scope.totaldata[key].label};
+        index++;
+      }
+      console.log($scope.searchObject);
     };
 
     $scope.createDataset = function(){
@@ -92,6 +111,7 @@ angular.module('angularApp')
       }
 
       console.log($scope.totaldata);
+      $scope.generateSearch();
     };
 
     $scope.create = function(selected){
