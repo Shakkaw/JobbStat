@@ -1,94 +1,86 @@
 
+<div class="row">
+  <div class="col-lg-9">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4><i class="fa fa-bar-chart" aria-hidden="true"></i>
+      {{currentObject.label}}</h4></div>
+      <div class="panel-body">
+        
+
+
+        <table class="table-condensed results-table">
+          <tr class="toprow">
+            <th>Namn</th>
+            
+            <th>16-24</th>
+            <th>25-29</th>
+            <th>30-34</th>
+            <th>35-39</th>
+            <th>40-44</th>
+            <th>45-49</th>
+            <th>50-54</th>
+            <th>55-59</th>
+            <th>60-64</th>
+
+          </tr>
+          <tr ng-repeat="(key,val) in dataset2.dataset.dimension.UtbinriktnSUN2000.category.index" ng-class-even="'evenrow'">
+            <td class="toprow"><i class="fa fa-{{labels[$index]}}" aria-hidden="true"></i> {{dataset2.dataset.dimension.UtbinriktnSUN2000.category.label[key]}}</td>
+            <td class="colorcell" ng-style="{'background-color': memes(currentObject.cell[$index + 9 * $parent.$index].total)}" ng-repeat="(wew,lad) in dataset2.dataset.dimension.Alder.category.index">
+              <span class="">{{currentObject.cell[$index + 9 * $parent.$index].total}}</span>
+
+            </td>
+
+          </tr>
+          <tr>
+            <th>Total</th>
+            <td ng-repeat="val in currentObject.columnVal track by $index">{{val}}</td>
+
+          </tr>
+        </table>
+
+      </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading"><i class="fa fa-info-circle" aria-hidden="true"></i>
+  Ytterligare information</div>
+      <div class="panel-body">
+      <ul class="list-unstyled">
+        <button ng-click="createDataset()">Create dataset</button>
+        <li><strong>Antal arbetare: </strong>{{currentObject.total}}</li>
+        <li><strong>Antal män: </strong>{{currentObject.totalMan}}</li>
+        <li><strong>Antal kvinnor: </strong>{{currentObject.totalKvinnor}}</li>
+        <li><strong>Andel män: </strong>{{currentObject.totalMan/currentObject.total *100 | number:0}} %</li>
+        <li><strong>Andel kvinnor: </strong>{{currentObject.totalKvinnor/currentObject.total *100 | number:0}} %</li>
+      </ul>
+
+
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-lg-3">
+    <div class="panel panel-default search-panel">
+      <div class="panel-heading"><i class="fa fa-list" aria-hidden="true"></i>
+    {{wew}}</div>
+      <div class="panel-body search-table pre-scrollable">
+        <table class="table table-condensed">
+          <tr ng-repeat="jobb in totaldata">
+            <td><a href="" ng-click="select(jobb.id)">{{jobb.label}}</a></td>
+
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
   
 
-  <div class="panel panel-default">
-    <div class="panel-heading"><h3><i class="fa fa-bar-chart" aria-hidden="true"></i>
-{{dataset.dataset.dimension.Yrke2012.category.label[selectedID]}}</h3></div>
-    <div class="panel-body">
-      
 
 
-      <table class="table-condensed results-table">
-        <tr class="toprow">
-          <th>Namn</th>
-          <!--
-          <th ng-repeat="(wew,lad) in dataset2.dataset.dimension.Alder.category.index">
-            <span>{{dataset2.dataset.dimension.Alder.category.label[wew]}}</span>
-          </th>
-          -->
-          
-          <th>16-24</th>
-          <th>25-29</th>
-          <th>30-34</th>
-          <th>35-39</th>
-          <th>40-44</th>
-          <th>45-49</th>
-          <th>50-54</th>
-          <th>55-59</th>
-          <th>60-64</th>
+</div>  
 
-        </tr>
-        <tr ng-repeat="(key,val) in dataset2.dataset.dimension.UtbinriktnSUN2000.category.index" ng-class-even="'evenrow'">
-          <td class="toprow"><i class="fa fa-{{labels[$index]}}" aria-hidden="true"></i> {{dataset2.dataset.dimension.UtbinriktnSUN2000.category.label[key]}}</td>
-          <td class="colorcell" ng-style="{'background-color': memes(currentObject.cell[$index + 9 * $parent.$index].total)}" ng-repeat="(wew,lad) in dataset2.dataset.dimension.Alder.category.index">
-            <span class="">{{currentObject.cell[$index + 9 * $parent.$index].total}}</span>
-
-          </td>
-
-        </tr>
-        <tr>
-          <th>Total</th>
-          <td ng-repeat="val in currentObject.columnVal track by $index">{{val}}</td>
-
-        </tr>
-      </table>
-
-    </div>
-  </div>
-
-  <div class="panel panel-primary">
-    <div class="panel-heading"><i class="fa fa-info-circle" aria-hidden="true"></i>
-Ytterligare information</div>
-    <div class="panel-body">
-    <ul class="list-unstyled">
-      <button ng-click="createDataset()">Create dataset</button>
-      <li><strong>Antal arbetare: </strong>{{currentObject.total}}</li>
-      <li><strong>Antal män: </strong>{{currentObject.totalMan}}</li>
-      <li><strong>Antal kvinnor: </strong>{{currentObject.totalKvinnor}}</li>
-      <li><strong>Andel män: </strong>{{currentObject.totalMan/currentObject.total *100 | number:0}} %</li>
-      <li><strong>Andel kvinnor: </strong>{{currentObject.totalKvinnor/currentObject.total *100 | number:0}} %</li>
-    </ul>
-
-
-    </div>
-  </div>
-
-
-
-
-
-
-<input class="sok" placeholder="Filtrera jobb" ng-model="query"></input>
-<h1>{{wew}}</h1>
-<!--<h2>{{dataset.dataset.dimension.Yrke2012.category.index.hasOwnProperty('0210')}}</h2>-->
-
-<input placeholder="Sök kommun" ng-model="search"></input>
-
-<table class="table">
-  <tr>
-    <th>Kod</th>
-    <th>Namn</th>
-
-
-  </tr>
-  <tr ng-repeat="(key,val) in dataset.dataset.dimension.Yrke2012.category.label" >
-    <td>{{key}}</td>
-    <td><a href="" ng-click="select(key)">{{dataset.dataset.dimension.Yrke2012.category.label[key]}}</a></td>
-
-
-    
-
-  </tr>
-</table>
-
-</div>
+  
