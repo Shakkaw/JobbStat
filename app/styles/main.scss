@@ -107,9 +107,11 @@ body {
   font-family: 'Oswald', sans-serif;
   font-weight: 300;
   font-size: 14px;
+  text-align: center;
   th{
     font-weight: 300;
     font-size: 12px;
+    text-align: center;
   }
 }
 
@@ -132,4 +134,31 @@ body {
 .search-table{
   padding:0;
   min-height: 506px;
+}
+
+.activerow{
+  background-color: #337ab7;
+  color: #fff;
+  a{
+    color: #fff;
+  }
+}
+
+.lan{
+  background-color: #f00;
+  transform: scale(.6, .6);
+}
+
+.regiontable{
+  tr{
+    td{
+      padding-right: 20px;
+    }
+  }
+}
+
+.karta{
+  width:200px;
+  height:400px;
+  margin-top: 20px;
 }

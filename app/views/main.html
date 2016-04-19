@@ -21,6 +21,7 @@
             <th>50-54</th>
             <th>55-59</th>
             <th>60-64</th>
+            <th>Total</th>
 
           </tr>
           <tr ng-repeat="(key,val) in dataset2.dataset.dimension.UtbinriktnSUN2000.category.index" ng-class-even="'evenrow'">
@@ -29,11 +30,12 @@
               <span class="">{{currentObject.cell[$index + 9 * $parent.$index].total}}</span>
 
             </td>
+            <td class="colorcell">{{currentObject.rowVal[$index]}}</td>
 
           </tr>
           <tr>
             <th>Total</th>
-            <td ng-repeat="val in currentObject.columnVal track by $index">{{val}}</td>
+            <td class="colorcell" ng-repeat="val in currentObject.columnVal track by $index">{{val}}</td>
 
           </tr>
         </table>
@@ -42,11 +44,12 @@
     </div>
     <div class="panel panel-primary">
       <div class="panel-heading"><i class="fa fa-info-circle" aria-hidden="true"></i>
-  Ytterligare information
+  Översikt
 
   </div>
-      <div class="panel-body">
-      <ul class="list-unstyled">
+      <div class="panel-body row">
+        <div class="col-sm-4">
+          <ul class="list-unstyled">
         <li><strong>Antal arbetare: </strong>{{currentObject.total}}</li>
         <li><strong>Antal män: </strong>{{currentObject.totalMan}}</li>
         <li><strong>Antal kvinnor: </strong>{{currentObject.totalKvinnor}}</li>
@@ -54,12 +57,64 @@
         <li><strong>Andel kvinnor: </strong>{{currentObject.totalKvinnor/currentObject.total *100 | number:0}} %</li>
       </ul>
 
+        </div>
+        <div class="col-sm-4">
+          <table class="regiontable">
+          <tr>
+            <th>Region</th>
+            <th>Antal</th>
+            <th>n/10k</th>
+          </tr>
+          <tr ng-repeat="region in lanOrdnad">
+            <td>{{region.namn}}</td>
+            <td>{{currentObject.region[region.id].total}}</td>
+            <td>{{currentObject.region[region.id].total/region.invanare * 10000 | number: 0}}</td>
+          </tr>
+        </table>
+        </div>
+      
+      <div class="col-sm-4">
+        <div class="">
+          <svg class="karta"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns="http://www.w3.org/2000/svg"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:cc="http://web.resource.org/cc/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         version="1.0"
+         
+         id="svg2">
+          <defs id="defs640" />
+          <metadata 
+            id="metadata1880"><rdf:RDF><cc:Work
+                rdf:about=""><dc:title>Counties of Sweden</dc:title><dc:date>2010-05-01</dc:date><dc:creator><cc:Agent><dc:title>Lokal_Profil</dc:title></cc:Agent></dc:creator><cc:license
+                rdf:resource="http://creativecommons.org/licenses/by-sa/2.5/" /><dc:rights><cc:Agent><dc:title>cc-by-sa-2.5</dc:title></cc:Agent></dc:rights><dc:format>image/svg+xml</dc:format><dc:type
+                rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work><cc:License
+                rdf:about="http://creativecommons.org/licenses/by-sa/2.5/"><cc:permits
+                rdf:resource="http://web.resource.org/cc/Reproduction" /><cc:permits
+                rdf:resource="http://web.resource.org/cc/Distribution" /><cc:requires
+                rdf:resource="http://web.resource.org/cc/Notice" /><cc:requires
+                rdf:resource="http://web.resource.org/cc/Attribution" /><cc:permits
+                rdf:resource="http://web.resource.org/cc/DerivativeWorks" /><cc:requires
+                rdf:resource="http://web.resource.org/cc/ShareAlike" /></cc:License></rdf:RDF>
+          </metadata>
+          <style type='text/css' id='style_css_sheet'>
+            .lan { fill:#8EC4D5; fill-rule:evenodd; stroke:#EEE; stroke-width:1.0001;}
+          </style>
+          <g class="lan" id="Lan">
+            <path ng-repeat="region in mapdata" id="r{{region.id}}" class="region" d={{region.d}} />
+          </g>
+        
+          </svg>
+        </div>
 
+        </div>
+      
       </div>
     </div>
   </div>
   
-  <div class="col-lg-3">
+  <div class=" col-sm-6 col-lg-3">
     <div class="panel panel-default search-panel">
       <div class="panel-heading"><i class="fa fa-list" aria-hidden="true"></i>
     {{wew}}
@@ -67,7 +122,7 @@
     </div>
       <div class="panel-body search-table pre-scrollable">
       <table class="table table-condensed">
-          <tr ng-repeat="jobb in searchObject | filter: query">
+          <tr ng-class="{activerow: isActive(jobb.key)}" ng-repeat="jobb in searchObject | filter: query">
             <td><a href="" ng-click="select(jobb.key)">{{jobb.label}}</a></td>
 
           </tr>
