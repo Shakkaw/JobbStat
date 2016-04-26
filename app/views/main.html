@@ -112,6 +112,32 @@
       
       </div>
     </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading"><i class="fa fa-info-circle" aria-hidden="true"></i> Lönestatistik</div>
+      <div class="panel-body">
+      <table class="table-condensed results-table">
+        <tr class="toprow">
+          <th></th>
+          <th>Medellön</th>
+          <th>Medianlön</th>
+          <th>10p</th>
+          <th>25p</th>
+          <th>75p</th>
+          <th>90p</th>
+        </tr>
+        <tr class="list-unstyled" ng-repeat="(key,sektor) in currentObject.sektorTotal track by $index">
+          <td class="toprow">{{manadslondata.dataset.dimension.Sektor.category.label[key]}}</td>
+          <td class="colorcell" ng-repeat="wew in sektor track by $index">{{sektor[$index]}}</td>
+
+        </tr>
+      </table>
+      
+
+
+
+      </div>
+
+    </div>
   </div>
   
   <div class=" col-sm-6 col-lg-3">

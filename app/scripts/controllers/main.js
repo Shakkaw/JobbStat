@@ -23,8 +23,12 @@ angular.module('angularApp')
             $scope.dataset2 = data;
             $http.get('./data/jobbstat_region.json').success(function(data) {
               $scope.regiondata = data;
-              $scope.createDataset();
-              $scope.lanColor();
+              $http.get('./data/manadslon_total.json').success(function(data) {
+                //console.log("MEMES");
+                $scope.manadslondata = data;
+                $scope.createDataset();
+                $scope.lanColor();
+              });
             });
           });
         });
@@ -363,8 +367,8 @@ angular.module('angularApp')
 
         var currentData = $scope.regiondata.dataset.value.slice(regionStart,regionEnd);
 
-        console.log(currentRegion);
-        console.log(currentData);
+        //console.log(currentRegion);
+        //console.log(currentData);
 
 
         //console.log(currentData);
@@ -386,16 +390,63 @@ angular.module('angularApp')
           if (kvinnor > $scope.totaldata[key2].regionMaxKvinnor.kvinnor) {$scope.totaldata[key2].regionMaxKvinnor = summary;}
           else if (kvinnor < $scope.totaldata[key2].regionMinKvinnor.kvinnor) {$scope.totaldata[key2].regionMinKvinnor = summary;}
 
-
-
-
-
           $scope.totaldata[key2].region[key] = summary;
-
-          //$scope.totaldata[key2].region[key] = {total: total, man: man, kvinnor: kvinnor};
 
         }
 
+      }
+      var sektorLength = 2592;
+      var yrkeLength = 6;
+      var keyLength = 6;
+      //console.log($scope.manadslondata.dataset.dimension.Sektor.category.index);
+      for (var key3 in $scope.manadslondata.dataset.dimension.Yrke2012.category.index) {
+        var currentYrkeIndex = $scope.manadslondata.dataset.dimension.Yrke2012.category.index[key3];
+        //console.log(key);
+        //console.log($scope.manadslondata.dataset.dimension.Sektor.category.label[key]);
+        for (var key4 in $scope.manadslondata.dataset.dimension.Sektor.category.index) {
+          var currentSektorIndex = $scope.manadslondata.dataset.dimension.Sektor.category.index[key4];
+          //console.log('Kod: ' + key3 + ' Sektor: ' + key4);
+          //console.log('Kod-index: ' + currentYrkeIndex + ' Sektor-index: ' + currentSektorIndex);
+          
+          //console.log($scope.manadslondata.dataset.dimension.Yrke2012.category.label[key3] + 
+          // ' ' + $scope.manadslondata.dataset.dimension.Sektor.category.label[key4]);
+
+          var currentLon = {};
+
+          for (var key5 in $scope.manadslondata.dataset.dimension.ContentsCode.category.index) {
+            var currentKeyIndex = $scope.manadslondata.dataset.dimension.ContentsCode.category.index[key5];
+            //console.log(currentKeyIndex);
+            //currentLon.medel =  $scope.manadslondata.dataset.value.slice(regionStart,regionEnd);
+            var currentSektorIndexPos = currentSektorIndex * sektorLength;
+            var currentYrkeIndexPos = currentYrkeIndex * yrkeLength;
+            var currentSektor = $scope.manadslondata.dataset.dimension.Sektor.category.index[key4];
+            var currentCode = $scope.manadslondata.dataset.dimension.ContentsCode.category.index[key5];
+
+            var currentIndex = currentSektorIndexPos + currentYrkeIndexPos + currentKeyIndex;
+            //console.log('AAAA' + currentSektorIndexPos + ', ' + currentYrkeIndex + ', ' + currentYrkeIndexPos + ', ' + currentKeyIndex);
+            //console.log(currentIndex + ": " + $scope.manadslondata.dataset.value[currentIndex]);
+            var lon = $scope.manadslondata.dataset.value[currentIndex];
+
+            currentLon[currentCode] = lon;
+
+
+
+            if (key3 != '0000' && key3 != '0001') {
+              //$scope.totaldata[key3].sektorTotal[key4] = currentLon;
+              $scope.totaldata[key3].sektorTotal[key4] = currentLon;
+            }
+            
+
+            
+
+
+
+          }
+
+
+
+
+        }
       }
 
       console.log($scope.totaldata);
@@ -420,7 +471,8 @@ angular.module('angularApp')
         regionMinKvinnor: {id: '00', total: 99999, man: 99999, kvinnor: 99999},
         regionMaxDensity: {id: '00', total: 0, man: 0, kvinnor: 0},
         regionMinDensity: {id: '00', total: 99999, man: 99999, kvinnor: 99999},
-        region:[]
+        region:[],
+        sektorTotal:{}
 
       };
       $scope.selectedID = selected;
