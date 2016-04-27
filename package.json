@@ -40,7 +40,7 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js",
-    "postinstall": "grunt build"
+    "postinstall": "bash ./post_install.sh"
   },
   "dependencies": {
     "express": "^4.13.4",
