@@ -357,10 +357,11 @@ angular.module('angularApp')
       for (key in $scope.regiondata.dataset.dimension.Region.category.index) {
         console.log(key + ' ' + $scope.regiondata.dataset.dimension.Region.category.index[key] + ' ' + $scope.regiondata.dataset.dimension.Region.category.label[key]);
         
-        var currentRegion = {
+        /*var currentRegion = {
           index: $scope.regiondata.dataset.dimension.Region.category.index[key],
           label: $scope.regiondata.dataset.dimension.Region.category.label[key]
         };
+        */
 
         var regionStart = $scope.regiondata.dataset.dimension.Region.category.index[key] * 860;
         var regionEnd = $scope.regiondata.dataset.dimension.Region.category.index[key] * 860 + 860;
@@ -397,7 +398,7 @@ angular.module('angularApp')
       }
       var sektorLength = 2592;
       var yrkeLength = 6;
-      var keyLength = 6;
+      //var keyLength = 6;
       //console.log($scope.manadslondata.dataset.dimension.Sektor.category.index);
       for (var key3 in $scope.manadslondata.dataset.dimension.Yrke2012.category.index) {
         var currentYrkeIndex = $scope.manadslondata.dataset.dimension.Yrke2012.category.index[key3];
@@ -419,7 +420,7 @@ angular.module('angularApp')
             //currentLon.medel =  $scope.manadslondata.dataset.value.slice(regionStart,regionEnd);
             var currentSektorIndexPos = currentSektorIndex * sektorLength;
             var currentYrkeIndexPos = currentYrkeIndex * yrkeLength;
-            var currentSektor = $scope.manadslondata.dataset.dimension.Sektor.category.index[key4];
+            //var currentSektor = $scope.manadslondata.dataset.dimension.Sektor.category.index[key4];
             var currentCode = $scope.manadslondata.dataset.dimension.ContentsCode.category.index[key5];
 
             var currentIndex = currentSektorIndexPos + currentYrkeIndexPos + currentKeyIndex;
@@ -431,7 +432,7 @@ angular.module('angularApp')
 
 
 
-            if (key3 != '0000' && key3 != '0001') {
+            if (key3 !== '0000' && key3 !== '0001') {
               //$scope.totaldata[key3].sektorTotal[key4] = currentLon;
               $scope.totaldata[key3].sektorTotal[key4] = currentLon;
             }
