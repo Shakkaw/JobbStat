@@ -39,7 +39,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "karma start test/karma.conf.js"
+    "test": "karma start test/karma.conf.js",
+    "postinstall": "echo postinstall time; ./node_modules/grunt-cli/bin/grunt build"
   },
   "dependencies": {
     "express": "^4.13.4",
