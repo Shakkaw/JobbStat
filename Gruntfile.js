@@ -425,6 +425,11 @@ module.exports = function (grunt) {
           cwd: '.',
           src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
           dest: '<%= yeoman.dist %>'
+        }, {
+          cwd: 'app/data/',  // set working folder / root to copy
+          src: '**/*',           // copy all files and subfolders
+          dest: 'dist/data/',    // destination folder
+          expand: true           // required when using cwd
         }]
       },
       styles: {
