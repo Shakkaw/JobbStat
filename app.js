@@ -4,7 +4,7 @@ var app = express();
 var port = process.env.PORT || 3000;
 
 app.set('port', (process.env.PORT || 5000));
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + '/dist'));
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
